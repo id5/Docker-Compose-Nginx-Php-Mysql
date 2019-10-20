@@ -1,0 +1,26 @@
+#!/bin/sh
+base_path="$PWD"
+
+#download wp cli
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+&& chmod +x wp-cli.phar 
+
+#Clear app path
+chmod -R 777 legba/wp/public/ \
+&& rm -rf legba/wp/public \
+&& mkdir legba/wp/public
+
+#Clone repositories
+ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
+git clone git@${WP_CORE} legba/wp/public/
+
+#Download custom theme
+if [ ${WP_THEME} != false ] && [ ${WP_THEME_PATH} != false ]; then \
+    git clone git@${WP_THEME} legba/wp/public/wp-content/themes/${WP_THEME_PATH} \
+;fi
+
+docker-compose up -d
+
+#Generate wp-config
+cd legba/wp/public \
+&& ${base_path}/wp-cli.phar config create --dbname=default --dbuser=default --dbpass=secret --dbhost=mysql --skip-check --allow-root
