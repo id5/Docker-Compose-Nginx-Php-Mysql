@@ -28,6 +28,15 @@ nginx/sites/*
 !nginx/sites/default.conf
 !nginx/sites/api.dev.conf
 
+# ignora tudo no diretório "nginx/sites", exceto:
+legba/sites/*
+!legba/sites/default.conf
+!legba/sites/wp.conf
+legba/logs/
+legba/wp/public/*
+#!legba/wp/public
+
+wp-cli.phar
 # ignora todos os arquivos iniciados com .
 .*
 

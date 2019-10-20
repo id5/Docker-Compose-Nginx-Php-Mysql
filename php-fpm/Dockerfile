@@ -217,12 +217,14 @@ RUN if [ ${INSTALL_INTL} = true ]; then \
 # Clear package lists
 RUN rm -rf /var/lib/apt/lists/*
 
-# Permissions
-RUN chown -R root:www-data /var/www/html
-RUN chmod u+rwx,g+rx,o+rx /var/www/html
-RUN find /var/www/html -type d -exec chmod u+rwx,g+rx,o+rx {} +
-RUN find /var/www/html -type f -exec chmod u+rw,g+rw,o+r {} +
 
 CMD ["php-fpm"]
+
+# Permissions
+ARG CACHEBUST=1
+RUN chown -R root:www-data /var/www/html \
+&& chmod u+rwx,g+rwx,o+rx /var/www/html \
+&& find /var/www/html -type d -exec chmod u+rwx,g+rx,o+rx {} + \
+&& find /var/www/html -type f -exec chmod u+rw,g+rw,o+r {} +
 
 EXPOSE 9000
