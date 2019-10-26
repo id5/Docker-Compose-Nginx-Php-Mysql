@@ -1,5 +1,7 @@
 # Descrição
 
+Entrega uma maneira simples e rápida de levantar uma aplicação wordpress a partir de repositórios distintos do wordpress e do tema. Importa dump do banco e arquivos de mídia.
+
 Docker utilizando o compose, arquivo de configuração com variáveis de ambiente, criando um container nginx 1.13.3 e um container php 7.1.9-fpm ligados através de um link e criando um container mysql 5.7.19.
 
 # Configuração Container Nginx
@@ -18,7 +20,7 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 	
 3. Virtual Host
 
-	Criação do vhost modelo http://api.dev (vhost modificável)
+	Criação do vhost modelo http://wp.dev (vhost modificável)
 
 # Configuração Container Php
 
@@ -60,7 +62,7 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 1. Clone o repositório usando o comando:
 
-   git clone https://github.com/danielnogueira-dev/Docker-Compose-Nginx-Php-Mysql
+   git clone https://github.com/id5/Docker-Compose-Nginx-Php-Mysql
 
 2. Entre na pasta Docker-Compose-Nginx-Php-Mysql e copie o arquivo env-example para .env.
 
@@ -68,38 +70,14 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 3. Rode seu container:
 
-   docker-compose up -d
+	WP_CORE=URL.git WP_THEME=URL_TEMA.git WP_THEME_PATH=nome-pasta-tema ./legba4
 
-4. Adicione os domínios no arquivo de hosts do windows.
+4. Adicione o domínios no arquivo de hosts.
 
-   127.0.0.1 localhost
-
-   127.0.0.1 api.dev
+   127.0.0.1 wp.dev
 
 5. Abra no navegador
 
-   http://localhost
+   http://wp.dev
 
-   http://api.dev
-
-6. Acessar o shell do container:
-    
-	winpty docker exec -it nginx bash
-
-	winpty docker exec -it php-fpm bash
-	
-	winpty docker exec -it mysql bash
-
-7. Acessar o banco de dados dentro do container Mysql
-
-	mysql -u root -p
-
-8. Comandos básicos para utilizar o banco de dados
-
-	show databases;
-
-	CREATE DATABASE teste;
-	
-	use teste;
-	
-	show tables;
+Projeto baseado em https://github.com/danielnogueira-dev/Docker-Compose-Nginx-Php-Mysql
