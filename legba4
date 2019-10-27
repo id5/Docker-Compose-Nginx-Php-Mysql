@@ -59,4 +59,8 @@ fi
 if [ -n ${WP_DUMP} ] 
 then
     ${base_path}/wp-cli.phar db import ${WP_DUMP} 
+
+    CURRENT_URL=`${base_path}/wp-cli.phar option get siteurl`
+
+    ${base_path}/wp-cli.phar search-replace ${CURRENT_URL} 'http://wp.dev' --all-tables
 fi
