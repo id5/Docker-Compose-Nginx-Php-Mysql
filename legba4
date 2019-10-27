@@ -5,22 +5,58 @@ base_path="$PWD"
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 && chmod +x wp-cli.phar 
 
-#Clear app path
-chmod -R 777 legba/wp/public/ \
-&& rm -rf legba/wp/public \
-&& mkdir legba/wp/public
+chmod -R 777 legba/wp/public/
 
 #Clone repositories
 ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
-git clone git@${WP_CORE} legba/wp/public/
+
+if [ -z ${WP_BRANCH} ] 
+then
+    WP_BRANCH = 'master'
+fi
+
+if [ -n "${WP_CORE}" ]
+then
+    #Clear app path
+    rm -rf legba/wp/public \
+    && mkdir legba/wp/public
+
+    git clone --branch ${WP_BRANCH} git@${WP_CORE} ${base_path}/legba/wp/public/
+    
+    cd ${base_path}/legba/wp/public/
+else
+    cd ${base_path}/legba/wp/public/
+
+    REMOTE_URL=`git config --get remote.origin.url`
+
+    if [ -z "${REMOTE_URL}" ]
+    then
+        echo "Parece que não existe um repositório wordpress configurado. 
+        Rode o comando novamente passando o repositório wordpress como parâmetro. WP_CORE=url.git" \
+        exit n
+    fi
+    
+    git pull origin ${WP_BRANCH}
+fi
 
 #Download custom theme
-if [ ${WP_THEME} != false ] && [ ${WP_THEME_PATH} != false ]; then \
-    git clone git@${WP_THEME} legba/wp/public/wp-content/themes/${WP_THEME_PATH} \
-;fi
+if [ -n ${WP_THEME} ] && [ -n ${WP_THEME_PATH} ];
+then
+    git clone git@${WP_THEME} ${base_path}/legba/wp/public/wp-content/themes/${WP_THEME_PATH}
+fi
 
-docker-compose up -d
+cd ${base_path}
+docker-compose -f ${base_path}/docker-compose.yml up -d
 
-#Generate wp-config
-cd legba/wp/public \
-&& ${base_path}/wp-cli.phar config create --dbname=default --dbuser=default --dbpass=secret --dbhost=mysql --skip-check --allow-root
+cd ${base_path}/legba/wp/public/
+
+if [ ! -f "wp-config.php" ]
+then
+    ${base_path}/wp-cli.phar config create --dbname=default --dbuser=default --dbpass=secret --dbhost=mysql --skip-check --allow-root
+fi
+
+#Import database
+if [ -n ${WP_DUMP} ] 
+then
+    ${base_path}/wp-cli.phar db import ${WP_DUMP} 
+fi
