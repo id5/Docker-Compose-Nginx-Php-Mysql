@@ -1,4 +1,4 @@
-FROM php:7.1.9-fpm
+FROM php:7.0-fpm
  
 MAINTAINER Daniel Nogueira <danielnogueira.dev@gmail.com>
 
@@ -7,6 +7,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     curl \
     openssl \
+    libssl-dev \
     nano
 
 # Common php-ext and requirements
@@ -24,7 +25,7 @@ RUN apt-get install -y --no-install-recommends libpq-dev libz-dev \
 ARG INSTALL_GD=false
 RUN if [ ${INSTALL_GD} = true ]; then \
     # Install gd and requirements
-    apt-get install -y --no-install-recommends libjpeg-dev libpng12-dev libfreetype6-dev \
+    apt-get install -y --no-install-recommends libjpeg-dev libpng-dev libfreetype6-dev \
  && docker-php-ext-configure gd \
     --enable-gd-native-ttf \
     --with-jpeg-dir=/usr/lib \
