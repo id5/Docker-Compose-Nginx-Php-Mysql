@@ -12,7 +12,7 @@ ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
 
 if [ -z ${WP_BRANCH} ] 
 then
-    WP_BRANCH = 'master'
+    WP_BRANCH='master'
 fi
 
 if [ -n "${WP_CORE}" ]
@@ -40,7 +40,7 @@ else
 fi
 
 #Download custom theme
-if [ -n ${WP_THEME} ] && [ -n ${WP_THEME_PATH} ];
+if [[ -n ${WP_THEME} && -n ${WP_THEME_PATH} ]];
 then
     git clone git@${WP_THEME} ${base_path}/legba/wp/public/wp-content/themes/${WP_THEME_PATH}
 fi
