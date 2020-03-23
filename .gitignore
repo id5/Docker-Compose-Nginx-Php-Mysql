@@ -10,8 +10,6 @@ legba/sites/*
 !legba/sites/legba.dev.conf
 legba/logs/
 legba/html/*
-legba/html/.git
-legba/html/.gitignore
 
 # ignora todos os arquivos iniciados com .
 .*
