@@ -8,8 +8,8 @@ mysql/data/
 # ignora tudo no diretório "nginx/sites", exceto:
 legba/sites/*
 !legba/sites/legba.dev.conf
-legba/logs/
 legba/html/*
+legba/html/.*
 
 # ignora todos os arquivos iniciados com .
 .*
