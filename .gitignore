@@ -10,7 +10,7 @@ legba/sites/*
 !legba/sites/legba.dev.conf
 legba/html/*
 legba/html/.*
-
+!legba/html/info.php
 # ignora todos os arquivos iniciados com .
 .*
 
