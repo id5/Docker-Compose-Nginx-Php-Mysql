@@ -1,8 +1,8 @@
 version: '3'
 services:
     nginx:
-        container_name: nginx
-        restart: always
+        container_name: legba-nginx
+        restart: on-failure
         build:
             context: ./nginx
             dockerfile: Dockerfile
@@ -19,8 +19,8 @@ services:
             - code-network
 
     php-fpm:
-        container_name: php-fpm
-        restart: always
+        container_name: legba-php-fpm
+        restart: on-failure
         build:
             context: ./php-fpm
             args:
@@ -50,8 +50,8 @@ services:
             - code-network
 
     mysql:
-        container_name: mysql
-        restart: always
+        container_name: legba-mysql
+        restart: on-failure
         build:
             context: ./mysql
             dockerfile: Dockerfile

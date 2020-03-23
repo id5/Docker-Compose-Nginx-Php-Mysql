@@ -2,41 +2,15 @@
 # .gitignore para Docker
 # -----------------------------------------------------------------
 
-# ignora tudo no diretório "htdocs", exceto:
-htdocs/*
-!htdocs/api.dev
-htdocs/api.dev/*
-!htdocs/api.dev/public
-htdocs/api.dev/public/*
-!htdocs/50x.html
-!htdocs/index.html
-!htdocs/index.php
-!htdocs/bd.php
-!htdocs/api.dev/public/50x.html
-!htdocs/api.dev/public/index.html
-!htdocs/api.dev/public/index.php
-!htdocs/api.dev/public/bd.php
-
 # ignora tudo no diretório "mysql/data"
 mysql/data/
 
-# ignora tudo no diretório "nginx/logs"
-nginx/logs/
-
-# ignora tudo no diretório "nginx/sites", exceto:
-nginx/sites/*
-!nginx/sites/default.conf
-!nginx/sites/api.dev.conf
-
 # ignora tudo no diretório "nginx/sites", exceto:
 legba/sites/*
-!legba/sites/default.conf
-!legba/sites/wp.conf
+!legba/sites/legba.dev.conf
 legba/logs/
-legba/wp/public/*
-#!legba/wp/public
+legba/html/*
 
-wp-cli.phar
 # ignora todos os arquivos iniciados com .
 .*
 
