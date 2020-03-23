@@ -12,15 +12,15 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 2. Volume (Obs: verificar se na configuração do docker -> drivers compartilhados, as unidades c: e/ou d: estão habilitadas)
 
-	Aplicação: htdocs -> /var/www/html
+	Aplicação: legba/html -> /var/www/html
 	
-	Logs: nginx/logs -> /var/log/nginx
+	Logs: legba/logs -> /var/log/nginx
 	
-	Virtual Host: nginx/sites -> /etc/nginx/conf.d
+	Virtual Host: legba/sites -> /etc/nginx/conf.d
 	
 3. Virtual Host
 
-	Criação do vhost modelo http://wp.dev (vhost modificável)
+	Criação do vhost modelo http://legba.dev (vhost modificável)
 
 # Configuração Container Php
 
@@ -30,7 +30,7 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 2. Volume (Obs: verificar se na configuração do docker -> drivers compartilhados, as unidades c: e/ou d: estão habilitadas)
 
-	Aplicação: htdocs -> /var/www/html
+	Aplicação: legba/html -> /var/www/html
 	
 3. Bibliotecas
 
@@ -66,18 +66,10 @@ Docker utilizando o compose, arquivo de configuração com variáveis de ambient
 
 2. Entre na pasta Docker-Compose-Nginx-Php-Mysql e copie o arquivo env-example para .env.
 
-   cp env-example .env
+	cp env-example .env
 
 3. Rode seu container:
 
-	WP_CORE=URL.git WP_THEME=URL_TEMA.git WP_THEME_PATH=nome-pasta-tema ./legba4
-
-4. Adicione o domínios no arquivo de hosts.
-
-   127.0.0.1 wp.dev
-
-5. Abra no navegador
-
-   http://wp.dev
+docker-compose up -d
 
 Projeto baseado em https://github.com/danielnogueira-dev/Docker-Compose-Nginx-Php-Mysql
