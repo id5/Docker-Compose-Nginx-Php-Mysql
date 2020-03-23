@@ -5,7 +5,7 @@
 #----------------------#
 # Caminho da Aplicação #
 #----------------------#
-APPLICATION=./legba/
+APPLICATION=./legba/html
 
 #-----------------------------#
 # Customização dos Containers #
@@ -33,7 +33,7 @@ PHP_FPM_INSTALL_BCMATH=false
 PHP_FPM_INSTALL_OPCACHE=false
 PHP_FPM_INSTALL_MYSQLI=true
 PHP_FPM_INSTALL_XDEBUG=true
-PHP_FPM_INSTALL_COMPOSER=true
+PHP_FPM_INSTALL_COMPOSER=false
 PHP_FPM_INSTALL_TOKENIZER=true
 PHP_FPM_INSTALL_JSON_XML=true
 PHP_FPM_INSTALL_CURL=true
